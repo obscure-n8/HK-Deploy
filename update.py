@@ -1,134 +1,103 @@
-from sys import exit
-from importlib import import_module
-from logging import (
-    FileHandler,
-    StreamHandler,
-    INFO,
-    basicConfig,
-    error as log_error,
-    info as log_info,
-    getLogger,
-    ERROR,
-)
-from os import path, remove, environ
-from pymongo import AsyncMongoClient
-from pymongo.server_api import ServerApi
+from logging import FileHandler, StreamHandler, INFO, basicConfig, error as log_error, info as log_info
+from os import path as ospath, environ, remove
 from subprocess import run as srun, call as scall
-from asyncio import run as arun
+from pkg_resources import working_set
+from requests import get as rget
+from dotenv import load_dotenv, dotenv_values
+from pymongo import MongoClient
 
-getLogger("pymongo").setLevel(ERROR)
-
-var_list = [
-    "BOT_TOKEN",
-    "TELEGRAM_API",
-    "TELEGRAM_HASH",
-    "OWNER_ID",
-    "DATABASE_URL",
-    "BASE_URL",
-    "UPSTREAM_REPO",
-    "UPSTREAM_BRANCH",
-    "UPDATE_PKGS",
-]
-
-if path.exists("log.txt"):
-    with open("log.txt", "r+") as f:
+if ospath.exists('log.txt'):
+    with open('log.txt', 'r+') as f:
         f.truncate(0)
 
-if path.exists("rlog.txt"):
-    remove("rlog.txt")
+if ospath.exists('rlog.txt'):
+    remove('rlog.txt')
 
-basicConfig(
-    format="[%(asctime)s] [%(levelname)s] - %(message)s",
-    datefmt="%d-%b-%y %I:%M:%S %p",
-    handlers=[FileHandler("log.txt"), StreamHandler()],
-    level=INFO,
-)
+basicConfig(format="[%(asctime)s] [%(levelname)s] - %(message)s",
+            datefmt="%d-%b-%y %I:%M:%S %p",
+            handlers=[FileHandler('log.txt'), StreamHandler()],
+            level=INFO)
+
+CONFIG_FILE_URL = environ.get('CONFIG_FILE_URL')
 try:
-    settings = import_module("config")
-    config_file = {
-        key: value.strip() if isinstance(value, str) else value
-        for key, value in vars(settings).items()
-        if not key.startswith("__")
-    }
-except ModuleNotFoundError:
-    log_info("Config.py file is not Added! Checking ENVs..")
-    config_file = {}
+    if len(CONFIG_FILE_URL) == 0:
+        raise TypeError
+    try:
+        res = rget(CONFIG_FILE_URL)
+        if res.status_code == 200:
+            with open('config.env', 'wb+') as f:
+                f.write(res.content)
+        else:
+            log_error(f"Failed to download config.env {res.status_code}")
+    except Exception as e:
+        log_error(f"CONFIG_FILE_URL: {e}")
+except:
+    pass
 
-env_updates = {
-    key: value.strip() if isinstance(value, str) else value
-    for key, value in environ.items()
-    if key in var_list
-}
-if env_updates:
-    log_info("Config data is updated with ENVs!")
-    config_file.update(env_updates)
+load_dotenv('config.env', override=True)
 
-BOT_TOKEN = config_file.get("BOT_TOKEN", "")
-if not BOT_TOKEN:
+try:
+    if bool(environ.get('_____REMOVE_THIS_LINE_____')):
+        log_error('The README.md file there to be read! Exiting now!')
+        exit()
+except:
+    pass
+
+BOT_TOKEN = environ.get('BOT_TOKEN', '')
+if len(BOT_TOKEN) == 0:
     log_error("BOT_TOKEN variable is missing! Exiting now")
     exit(1)
 
-BOT_ID = BOT_TOKEN.split(":", 1)[0]
+bot_id = BOT_TOKEN.split(':', 1)[0]
 
-async def fetch_database_config():
-    """Fetch configuration from MongoDB."""
-    global config_file
-    DATABASE_URL = config_file.get("DATABASE_URL", "").strip()
-    if not DATABASE_URL:
-        return
+DATABASE_URL = environ.get('DATABASE_URL', '')
+if len(DATABASE_URL) == 0:
+    DATABASE_URL = None
 
-    conn = None
-    try:
-        conn = AsyncMongoClient(DATABASE_URL, server_api=ServerApi("1"))
-        db = conn.beast
-        old_config = await db.settings.deployConfig.find_one({"_id": BOT_ID}, {"_id": 0})
-        config_dict = await db.settings.config.find_one({"_id": BOT_ID})
-        if (
-            old_config is not None and old_config == config_file or old_config is None
-        ) and config_dict is not None:
-            config_file["UPSTREAM_REPO"] = config_dict["UPSTREAM_REPO"]
-            config_file["UPSTREAM_BRANCH"] = config_dict.get("UPSTREAM_BRANCH", "wzv3")
-            config_file["UPDATE_PKGS"] = config_dict.get("UPDATE_PKGS", "True")
-    except Exception as e:
-        log_error(f"Database ERROR: {e}")
-    finally:
-        if conn:
-            await conn.close()
+if DATABASE_URL is not None:
+    conn = MongoClient(DATABASE_URL)
+    db = conn.kpsmlx
+    old_config = db.settings.deployConfig.find_one({'_id': bot_id})
+    config_dict = db.settings.config.find_one({'_id': bot_id})
+    if old_config is not None:
+        del old_config['_id']
+    if (old_config is not None and old_config == dict(dotenv_values('config.env')) or old_config is None) \
+            and config_dict is not None:
+        environ['UPSTREAM_REPO'] = config_dict['UPSTREAM_REPO']
+        environ['UPSTREAM_BRANCH'] = config_dict['UPSTREAM_BRANCH']
+        environ['UPGRADE_PACKAGES'] = config_dict.get('UPDATE_PACKAGES', 'False')
+    conn.close()
 
-if DATABASE_URL := config_file.get("DATABASE_URL", "").strip():
-    arun(fetch_database_config())
+UPGRADE_PACKAGES = environ.get('UPGRADE_PACKAGES', 'False') 
+if UPGRADE_PACKAGES.lower() == 'true':
+    packages = [dist.project_name for dist in working_set]
+    scall("uv pip install --system " + ' '.join(packages), shell=True)
 
-UPSTREAM_REPO = config_file.get("UPSTREAM_REPO", "").strip()
-UPSTREAM_BRANCH = config_file.get("UPSTREAM_BRANCH", "").strip() or "wzv3"
+UPSTREAM_REPO = environ.get('UPSTREAM_REPO', '')
+if len(UPSTREAM_REPO) == 0:
+    UPSTREAM_REPO = "https://github.com/Tamilupdates/KPSML-X"
 
-if UPSTREAM_REPO:
-    if path.exists(".git"):
+UPSTREAM_BRANCH = environ.get('UPSTREAM_BRANCH', '')
+if len(UPSTREAM_BRANCH) == 0:
+    UPSTREAM_BRANCH = 'kpsmlx'
+
+if UPSTREAM_REPO is not None:
+    if ospath.exists('.git'):
         srun(["rm", "-rf", ".git"])
 
-    update = srun(
-        [
-            f"git init -q \
-                     && git config --global user.email 250646631+DownloaderrZone@users.noreply.github.com \
-                     && git config --global user.name Downloader Zone \
+    update = srun([f"git init -q \
+                     && git config --global user.email kpstorrent@gmail.com \
+                     && git config --global user.name kpsbots \
                      && git add . \
                      && git commit -sm update -q \
                      && git remote add origin {UPSTREAM_REPO} \
                      && git fetch origin -q \
-                     && git reset --hard origin/{UPSTREAM_BRANCH} -q"
-        ],
-        shell=True,
-    )
+                     && git reset --hard origin/{UPSTREAM_BRANCH} -q"], shell=True)
 
-    repo = UPSTREAM_REPO.split("/")
+    repo = UPSTREAM_REPO.split('/')
     UPSTREAM_REPO = f"https://github.com/{repo[-2]}/{repo[-1]}"
     if update.returncode == 0:
-        log_info("Successfully updated with Latest Updates !")
+        log_info('Successfully updated with latest commits !!')
     else:
-        log_error("Something went Wrong ! Recheck your details or Ask Support !")
-    log_info(f"UPSTREAM_REPO: {UPSTREAM_REPO} | UPSTREAM_BRANCH: {UPSTREAM_BRANCH}")
-
-
-UPDATE_PKGS = config_file.get("UPDATE_PKGS", "True")
-if (isinstance(UPDATE_PKGS, str) and UPDATE_PKGS.lower() == "true") or UPDATE_PKGS:
-    scall("uv pip install -U -r requirements.txt", shell=True)
-    log_info("Successfully Updated all the Packages !")
+        log_error('Something went Wrong ! Retry or Ask Support !')
+    log_info(f'UPSTREAM_REPO: {UPSTREAM_REPO} | UPSTREAM_BRANCH: {UPSTREAM_BRANCH}')

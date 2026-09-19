@@ -1,156 +1,401 @@
-<p align="center">
-  <img width="220" src="https://i.postimg.cc/XvdvXTkS/photo-2024-12-27-11-46-15.jpg" alt="Downloader Zone Logo">
+<div align=center>
+
+## KPSML-X: Ultimate Multi-Cloud Telegram Leech Bot
+
+<p>
+    <a href="https://github.com/Tamilupdates/KPSML-X">
+        <kbd>
+            <img src="https://graph.org/file/879239eb830dd6c00b07e.jpg" width="550" alt="KPSML-X Logo">
+        </kbd>
+    </a>
 </p>
 
-<p align="center">
-  <b>Modern Telegram Mirror/Leech Bot</b><br>
-  <i>Wzml-X is a powerful, modern Telegram bot for mirroring, leeching, and managing downloads to Google Drive, Telegram, or any RClone-supported cloud. Built for speed, reliability, and a beautiful user experience.</i>
-</p>
+<a href="https://github.com/Tamilupdates/KPSML-X/fork"><img alt="Forks" src="https://img.shields.io/github/forks/Tamilupdates/KPSML-X?style=plastic&logo=git&color=orange&label=Forks"></a> 
+<a href="https://github.com/Tamilupdates/KPSML-X/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/Tamilupdates/KPSML-X?style=plastic&logo=github&color=FFD700&label=Stars"></a>
+<a href="https://hub.docker.com/r/nanthakps/kpsmlx"><img src="https://img.shields.io/docker/pulls/nanthakps/kpsmlx?style=plastic&logo=docker&label=Pulls" alt="Docker Pulls"></a>
 
-<p align="center">
-  <a href="https://github.com/DownloaderZone/WZML-X"><img src="https://img.shields.io/github/stars/DownloaderZone/WZML-X?style=flat-square&color=yellow&logo=github"/></a>
-  <a href="https://github.com/DownloaderZone/WZML-X"><img src="https://img.shields.io/github/forks/DownloaderZone/WZML-X?style=flat-square&color=blue&logo=github"/></a>
-  <a href="https://t.me/DOWNLOADERZONEUPDATES"><img src="https://img.shields.io/badge/Telegram-Channel-blue?style=flat-square&logo=telegram"/></a>
-  <a href="https://t.me/DZONEDISCUSSION"><img src="https://img.shields.io/badge/Support-Group-blueviolet?style=flat-square&logo=telegram"/></a>
-  <a href="https://github.com/DownloaderZone/WZML-X/blob/main/LICENSE"><img src="https://img.shields.io/github/license/DownloaderZone/WZML-X?style=flat-square&color=success"/></a>
-</p>
+<a href="https://telegram.me/KPSBots"><img alt="Telegram Channel" img src="https://img.shields.io/badge/Join%20on%20Telegram%20Channel-0088CC?style=plastic&logo=telegram&logoColor=white&labelColor=0A3D62" width="250"></a>
+
+
+#### ***⚡️ Download Anything. Upload Everywhere. 🔥***
 
 ---
 
-## 🚀 Features
+### <img src="https://graph.org/file/504ba776ef0724a4ae85b.png" width="25" alt="Google Colab Logo"> Google Colab : [Deploy Link](https://colab.research.google.com/drive/1ntoqoj3jDq2FtU2-joizh0DO64uoec9q)
+
+</div>
+
+---
+
+## 📌 Key Highlights
 
 <details>
-  <summary><b>View all features</b></summary>
-
-- Multi-source Download: Supports torrents (qBittorrent, Aria2c), direct links, Mega.nz, YouTube (yt-dlp), devuploads, and more
-- Flexible Uploads: Upload to Google Drive, Telegram, RClone remotes, or supported DDL sites
-- Advanced File Management: Archive/extract (zip, rar, 7z), split/join files, rename, and more
-- User & Sudo Controls: Per-user settings, limits, and admin controls
-- Status & Queue System: Real-time status, unlimited tasks, and queue management
-- RSS Automation: Auto-download and filter RSS feeds
-- Database Support: MongoDB for persistent settings, tasks, and user data
-- Docker Ready: Easy deployment with Docker & docker-compose
-- Extensive Configurability: All features and limits are configurable via environment or config file
-- Multi-cloud: RClone integration for any supported cloud (GDrive, OneDrive, Dropbox, etc)
-- Multi-bot & Multi-user: Designed for groups, channels, and private use
-- Token/Multi-Shortener Support: Support for token based usage and multi-shortener services
-- **Actively Maintained**: By Downloader Zone & Team.
-</details>
+  <summary><strong>View All Highlights  <kbd>Click Here</kbd></strong></summary>
 
 ---
 
-## 🖥️ Live Demo & Public Mirror/Leech Group
+_KPSML-X is designed to make file management seamless, fast, and flexible._
 
- - Access All Services: [Click here](https://t.me/DzoneeManagerBot)
+- **🌐 Universal Downloader** - Supports torrents, Mega, Google Drive, direct links, and all `yt-dlp` sites.  
 
----
+- **☁️ Cloud Uploader** - Upload files to Google Drive, Telegram Cloud, Rclone, or DDL servers with ease.  
 
-## 📦 Deploy Methods
+- **📦 Smart File Handling** - Automatic renaming, metadata tagging, and organization.  
 
-- [Google Collab Deploy](https://colab.research.google.com/drive/1A9h93Qtyrk1Rf2902CXHOM0mTMah1AQ9?authuser=2)
+- **🧠 Intelligent Automation** - Auto-resume, retry, and cleanup for 24×7 reliability.  
 
----
+- **⚙️ Advanced Controls** - Manage downloads, uploads, and settings directly from Telegram (`/bs`, `/mirror`, `/leech`).  
 
-## ⚙️ Configuration
+- **🎯 Multi-Deployment Ready** - Deploy on Heroku, Docker, VPS, or Google Colab.  
 
-All configuration is done via `config.env` (or environment variables). See `config_sample.py` for all options and detailed comments.
+- **🔐 Secure & Private** - Owner-only commands, user whitelisting, and access control.  
 
-<details>
-  <summary><b>Click to view all config variables</b></summary>
+- **💨 Lightweight Performance** - Optimized Python & Pyrogram async engine for speed.  
 
-### Required
-- `BOT_TOKEN`: Telegram Bot Token from @BotFather
-- `OWNER_ID`: Telegram User ID of the bot owner
-- `TELEGRAM_API`: Telegram API ID from https://my.telegram.org
-- `TELEGRAM_HASH`: Telegram API Hash from https://my.telegram.org
-
-### Optional (most common)
-- `DATABASE_URL`: MongoDB connection string
-- `DOWNLOAD_DIR`: Local download directory
-- `AUTHORIZED_CHATS`: Space-separated list of allowed user/group IDs
-- `SUDO_USERS`: Space-separated list of sudo user IDs
-- `DEFAULT_UPLOAD`: `gd` (Google Drive), `rc` (RClone), or `ddl` (DDL sites)
-- `GDRIVE_ID`: Google Drive folder/TeamDrive ID or `root`
-- `RCLONE_PATH`: Default rclone path (e.g. `remote:path`)
-- `RCLONE_FLAGS`: RClone flags (see [RClone Flags](https://rclone.org/flags/))
-- `RCLONE_SERVE_URL`: URL for rclone serve (e.g. `http://myip:port`)
-- `RCLONE_SERVE_PORT`: Port for rclone serve (default: 8080)
-- `RCLONE_SERVE_USER`/`RCLONE_SERVE_PASS`: Auth for rclone serve
-- `LEECH_LOG_ID`/`MIRROR_LOG_ID`: Chat IDs for logs
-- `QUEUE_ALL`/`QUEUE_DOWNLOAD`/`QUEUE_UPLOAD`: Task queue limits
-- `DAILY_TASK_LIMIT`, `DAILY_MIRROR_LIMIT`, `DAILY_LEECH_LIMIT`: User limits
-- `YT_DLP_OPTIONS`: Default yt-dlp options (see [yt-dlp options](https://github.com/yt-dlp/yt-dlp/blob/master/yt_dlp/YoutubeDL.py#L184))
-- `EXTENSION_FILTER`: Space-separated list of file extensions to block
-- `SAFE_MODE`: Hide links/files in group, send to PM
-- `TIMEZONE`: Timezone (default: Asia/Kolkata)
-
-...and many more! See `config_sample.py`.
+- **💬 Active Community Support** - Join **[@KPSBots](https://telegram.me/KPSBots)** for updates and help.
 
 </details>
 
 ---
 
-## 📝 Usage
-
-- Start the bot on Telegram and use `/help` for all commands.
-- All commands can be set automatically with the `SET_COMMANDS` variable.
-- For advanced usage, see the Bot Commands below.
-
----
-## 🤖 Bot Commands
+## 🚀 Deployment Guide (VPS)
 
 <details>
-  <summary>Click to view all bot commands</summary>
+  <summary><strong>View All Steps  <kbd>Click Here</kbd></strong></summary>
 
-```
-mirror - or /m Mirror
-leech - or /l Leech
-qbmirror - or /qm Mirror torrent using qBittorrent
-qbleech - or /ql Leech torrent using qBittorrent
-jdmirror - or /jm Mirror files using JDownloader
-jdleech - or /jl Leech files using JDownloader
-ytdl - or /y Mirror yt-dlp supported link
-ytdlleech - or /yl Leech through yt-dlp supported link
-clone - Copy file/folder to Drive
-count - Count file/folder from Drive
-select - Select files from torrent
-list - Search files in Drive
-search - Search for torrents with API
-mediainfo - Get Mediainfo of the Target Media
-rss - Rss menu
-usetting - User settings
-status - Get Mirror Status message
-forcestart - Force start from queued task
-cancel - Cancel a task
-cancelall - Cancel all tasks
-login - Login to Bot
-ping - Ping the Bot
-stats - Bot Usage Stats
-speedtest - Check Internet Speed
-help - All cmds with description
-bsetting - Bot settings
-del - Delete file/folder from Drive
-restart - Restart the Bot
-restartses - Restart User Sessions
+---
+
+## 1. Prerequisites
+
+- **Tutorial Video from A to Z (Latest Video)**
+- Special thanks to [Wiszky](https://github.com/vishnoe115)
+
+[![See Video](https://img.shields.io/badge/See%20Video-black?style=for-the-badge&logo=YouTube)](https://youtu.be/xzLOLyKYl54)
+
+---
+
+## 2. Installing Requirements
+
+Clone this repository:
+
+```bash
+git clone https://github.com/Tamilupdates/KPSML-X kpsml-x && cd kpsml-x
 ```
 
+Setting up config file:
+    
+```
+cp config_sample.env config.env
+```
+
+- Remove the first line saying:
+
+```
+_____REMOVE_THIS_LINE_____=True
+```
+
+_Fill up rest of the fields. Meaning of each field is discussed below._
+
+**NOTE**: All values must be filled between quotes, even if it's `Int`, `Bool` or `List`.
+
+---
+
+## 3. Build and Run the Docker Image
+
+*Make sure you mount the app folder and install Docker following the official documentation.*
+
+There are two methods to build and run the Docker image:
+
+### 3.1 Using Official Docker Commands
+
+- **Start Docker daemon** (skip if already running):
+
+  ```bash
+  sudo dockerd
+  ```
+
+- **Build the Docker image:**
+
+  ```bash
+  sudo docker build . -t kpsmlx
+  ```
+
+- **Run the image:**
+
+  ```bash
+  sudo docker run -p 80:80 -p 8080:8080 kpsmlx
+  ```
+
+- **To stop the running image:**
+
+  First, list running containers:
+
+  ```bash
+  sudo docker ps
+  ```
+
+  Then, stop the container using its ID:
+
+  ```bash
+  sudo docker stop <container_id>
+  ```
+
+---
+
+### 3.2 Using docker-compose (Recommended)
+
+**Note:** If you want to use ports other than 80 and 8080 for torrent file selection and rclone serve respectively, update them in [docker-compose.yml](https://github.com/Tamilupdates/KPSML-X/blob/main/docker-compose.yml).
+
+- **Install docker-compose:**
+
+  ```bash
+  sudo apt install docker-compose
+  ```
+
+- **Build and run the Docker image (or view the current running image):**
+
+  ```bash
+  sudo docker-compose up
+  ```
+
+- **After editing files (e.g., using nano to edit start.sh), rebuild:**
+
+  ```bash
+  sudo docker-compose up --build
+  ```
+
+- **To stop the running image:**
+
+  ```bash
+  sudo docker-compose stop
+  ```
+
+- **To restart the image:**
+
+  ```bash
+  sudo docker-compose start
+  ```
+
+- **To view the latest logs from the running container (after mounting the folder):**
+
+  ```bash
+  sudo docker-compose up
+  ```
+
+- **Tutorial Video for docker-compose and checking ports:**
+
+  [![See Video](https://img.shields.io/badge/See%20Video-black?style=for-the-badge&logo=YouTube)](https://youtu.be/c8_TU1sPK08)
+
+
+------
+
+#### Docker Notes
+
+**IMPORTANT NOTES**:
+
+1. Set `BASE_URL_PORT` and `RCLONE_SERVE_PORT` variables to any port you want to use. Default is `80` and `8080` respectively.
+2. You should stop the running image before deleting the container and you should delete the container before the image.
+3. To delete the container (this will not affect on the image):
+
+```
+sudo docker container prune
+```
+
+4. To delete te images:
+
+```
+sudo docker image prune -a
+```
+
+5. Check the number of processing units of your machine with `nproc` cmd and times it by 4, then edit `AsyncIOThreadsCount` in qBittorrent.conf.
+    
+  </li></ol>
 </details>
 
 ---
 
-## 🏷️ Credits & Authors
-- **Downloader Zone** ([Telegram](https://t.me/DOWNLOADERZONEUPDATES), [GitHub](https://github.com/DOWNLOADER-ZONE))
-- **BeastBots Team** ([Telegram](https://t.me/MirrorBeast), [GitHub](https://github.com/BeastBots))
-- Base Repo is [WZML-X](https://github.com/SilentDemonSD/WZML-X)
+## 🚀 Deployment Guide (Heroku CLI)
+<details>
+  <summary><strong>View All Steps  <kbd>Click Here</kbd></strong></summary>
+  
+---
+  
+**Step 1 :** Git clone this Repo and change directory
+
+> Make sure git is Installed in your system or quick run `apt-get install git pip curl -y`
+
+```shell
+git clone https://github.com/Tamilupdates/KPSML-X kpsml-x && cd kpsml-x 
+```
 
 ---
 
-## 📄 License
+**Step 2 :** Now Install Heroku in your Sytem or checkout Official Heroku Deploy Docs, or Download via `apt-get` or `npm`
 
-This project is licensed under the [MIT License](LICENSE).
+> For Android : Use `termux` (Download via FDroid) for CLI usage
+
+**The script requires sudo and isn’t Windows compatible.**
+
+```shell
+curl https://cli-assets.heroku.com/install.sh | sh
+```
+
+**Install with Ubuntu / Debian apt-get**
+
+```shell
+curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
+```
+
+**Install via `npm` (Not Recommanded)**
+
+```shell
+npm install -g heroku
+```
+
+**Official Heroku Install Guide :** [Check Here](https://devcenter.heroku.com/articles/heroku-cli#install-the-heroku-cli)
 
 ---
 
-<p align="center">
-  <b>Made with ❤️ by Downloader Zone</b>
-</p>
+**Step 3 :** Login into Heroku and Log In CLI via Browser 
+
+_With Browser_
+
+```shell
+heroku login
+```
+
+**OR**
+
+_Without Browser_
+
+```shell
+heroku login -i
+```
+
+- Put `Heroku Email` : Heroku Email `email@example.com`
+
+- Put `Heroku Password` : Heroku API Key. Get from [Here](https://dashboard.heroku.com/account)
+
+---
+
+**Step 4 :** Create Heroku App and specify stack and region with App Name
+
+```shell
+heroku create --region us --stack container APP_NAME
+```
+
+**To Be Noted**: Copy the `BASE_URL` after the App is Created and Put the Value in `BASE_URL` when editing `config.env`
+
+**Notes:**
+- `--region us` for United States Server.
+
+- `--region eu` for Europe Server.
+
+- `APP_NAME` should be replaced with your unique app name _(Optional)_. If not given it generates a random name.
+
+- `--stack container` for setting stack to container for Dockerfile.
+
+- `--buildpack heroku/python` for using build slug for repo deploy and build.
+
+---
+
+**Step 5 :** Now set all the Required Variables and Files into this Branch MAIN Repo like config.env, accounts.zip, token.pickle, All Private Files(optional)- 
+
+  > Only config.env Mabdatory with Only Mandatory Vars Only, After that Put all Private Files or Vars via Bot Settings `/bs`
+
+**To Edit Inside CLI (nano Editor):** _(Termux Users)_
+
+```shell
+nano config.env
+```
+
+- **Sample config.env** _(Copy these and Paste in Editor and Fill Up)_
+  ```
+  BOT_TOKEN = ""
+  TELEGRAM_API = ""
+  TELEGRAM_HASH = ""
+  OWNER_ID = ""
+  DATABASE_URL = ""
+  BASE_URL = ""
+  SET_COMMANDS = "True"
+  UPSTREAM_REPO = "https://github.com/Tamilupdates/KPSML-X"
+  UPSTREAM_BRANCH = "kpsmlx"
+  ```
+- After Setup Exit from Editor via `CTRL + X`, followed via `y` and `Enter`...
+
+**Helpful Commands:**
+
+- **Exit from nano** : `CTRL + X`
+- **Save File** : `CTRL + S`
+- **Check Help** : `CTRL + G`
+- **Undo Changes** : `ALT + U`
+- ^ means CTRL _(Termux Users)_
+
+---
+
+**Step 6 :** Set Local git remote for Heroku. Give All Commands One by One.
+
+```shell
+git add . -f
+git commit -m "HK Setup"
+heroku git:remote -a APP_NAME
+```
+
+---
+
+**Step 7 :** Now push to Heroku via git forcefully to build.
+
+```shell
+git push heroku main -f
+```
+
+**Heroku Logs:** When checking Logs, Use this will give Complete Logs.
+
+```shell
+heroku logs -a APP_NAME
+```
+
+- Add arg `-t` for Live Stream Logs and Use `CTRL + C` to Exit from it.
+
+---
+
+**All Heroku CLI Commands :** [Click Here](https://devcenter.heroku.com/articles/heroku-cli-commands#heroku-config-set)
+</details>
+
+---
+
+## 🛠️ Variables Descriptions
+
+<details>
+  <summary><b>View All Variables  <kbd>Click Here</kbd></b></summary>
+
+- `BOT_TOKEN`: Telegram Bot Token that you got from [BotFather](https://t.me/BotFather). `Str`
+
+- `OWNER_ID`: Telegram User ID (not username) of the Owner of the bot. `Int`
+
+- `TELEGRAM_API`: This is to authenticate your Telegram account for downloading Telegram files. You can get this from <https://my.telegram.org>. `Int`
+
+- `TELEGRAM_HASH`: This is to authenticate your Telegram account for downloading Telegram files. You can get this from <https://my.telegram.org>. `Str`
+
+- `BASE_URL`: Valid BASE URL where the bot is deployed to use torrent web files selection.
+  - ***Heroku Deployment***: Format of URL should be `https://app-name-random_code.herokuapp.com/`, where `app-name` is the name of your heroku app Paste the URL got when the App was Made. `Str`
+
+  - ***VPS Deployment***: Format of URL should be `http://myip`, where `myip` is the IP/Domain(public) of your bot or if you have chosen port other than `80` so write it in this format `http://myip:port` (`http` and not `https`). `Str`
+
+- `DATABASE_URL`: Database URL of MongoDb to store all your files and Vars. Adding this will be Helpful. `Str`
+
+- `UPSTREAM_REPO`: GitHub repository URL, if your repo is private add `https://username:{githubtoken}@github.com/{username}/{reponame}` format. `Str`.
+    - **NOTE**:
+        - Any change in docker you need to deploy/build again with updated repo to take effect. 
+        - **No Need to delete .gitignore file or any File**
+
+- `UPSTREAM_BRANCH`: Upstream branch for update. Default is `kpsmlx`. `Str`
+
+</details>
+
+---
+
+## 🌿 Branch Specifications
+
+- All files to be Uploaded in `main` Branch and set Upstream as `kpsmlx` Branch.
+- View the **Upstream Branch**: **[kpsmlx](https://github.com/Tamilupdates/KPSML-X/tree/kpsmlx)**
